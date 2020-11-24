@@ -1,0 +1,49 @@
+variables:
+  ARTIFACT_NAME: mq-delayed-1.1.$CI_PIPELINE_IID.jar
+
+stages:
+  - test
+  - build
+  - functest
+  - deploy
+
+unit tests:
+  stage: test
+  image: openjdk:12-alpine
+  script:
+    - ./mvnw test
+
+build a jar:
+  stage: build
+  image: openjdk:12-alpine
+  script:
+    - ./mvnw package -Dmaven.test.skip=true
+    - mkdir ./build
+    - mv target/mq-delayed-messaging-1.1-jar-with-dependencies.jar ./build/$ARTIFACT_NAME
+  artifacts:
+    paths:
+      - ./build
+
+functional testing:
+  stage: functest
+  image: openjdk:12-alpine
+  services:
+    - rabbitmq
+  script:
+    - java -cp ./build/$ARTIFACT_NAME -DrabbitMqHost="rabbitmq" com.alexvait.mqdelay.RabbitInitRunner &
+    - sleep 20
+    - java -cp ./build/$ARTIFACT_NAME -DrabbitMqHost="rabbitmq" com.alexvait.mqdelay.functional_testing.FunctionalTestingReceiver > receiver_results.log &
+    - sleep 20
+    - java -cp ./build/$ARTIFACT_NAME -DrabbitMqHost="rabbitmq" com.alexvait.mqdelay.functional_testing.FunctionalTestingSender
+    - sleep 40
+    - cat receiver_results.log
+    - \[ $(grep -o "Success" receiver_results.log | wc -l | tr -d ' ') -eq 5 \]
+    - \[ $(grep -o "Error" receiver_results.log | wc -l | tr -d ' ') -eq 0 \]
+
+push to docker:
+  stage: deploy
+  image: openjdk:12-alpine
+  script:
+    - ./mvnw clean compile jib:build -Djib.to.auth.username=alexvaitsekhovich -Djib.to.auth.password="${DOCKERHUB_PASSWORD}"
+  only:
+    - main

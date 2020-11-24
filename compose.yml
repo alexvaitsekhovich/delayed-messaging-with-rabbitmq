@@ -1,0 +1,20 @@
+version: "3.8"
+services:
+
+  rabbit:
+    image: rabbitmq:3-management
+    ports:
+      - 15672:15672
+      - 5672:5672
+
+  delayed-messaging:
+    image: alexvaitsekhovich/mq-delayed-messaging
+    depends_on:
+      - rabbit
+    environment:
+      - rabbitMqHost=rabbit
+    restart: on-failure
+
+
+
+
