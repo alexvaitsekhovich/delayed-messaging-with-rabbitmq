@@ -1,10 +1,10 @@
 # Delayed messaging with RabbitMQ
 
 
-[![Build Status](https://travis-ci.org/alexvaitsekhovich/rabbitmq-delayed-messaging.svg?branch=master)](https://travis-ci.org/alexvaitsekhovich/rabbitmq-delayed-messaging) [![pipeline status](https://gitlab.com/alex.vaitsekhovich/rabbitmq-delayed-messaging/badges/master/pipeline.svg)](https://gitlab.com/alex.vaitsekhovich/rabbitmq-delayed-messaging/pipelines)
+[![Build Status](https://travis-ci.org/alexvaitsekhovich/delayed-messaging-with-rabbitmq.svg?branch=main)](https://travis-ci.org/alexvaitsekhovich/delayed-messaging-with-rabbitmq) [![pipeline status](https://gitlab.com/alex.vaitsekhovich/delayed-messaging-with-rabbitmq/badges/main/pipeline.svg)](https://gitlab.com/alex.vaitsekhovich/delayed-messaging-with-rabbitmq/pipelines)
 
-[![codecov](https://codecov.io/gh/alexvaitsekhovich/rabbitmq-delayed-messaging/branch/master/graph/badge.svg)](https://codecov.io/gh/alexvaitsekhovich/rabbitmq-delayed-messaging) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/813359310880497d8e55e58e2526b594)](https://app.codacy.com/manual/alexvaitsekhovich/rabbitmq-delayed-messaging?utm_source=github.com&utm_medium=referral&utm_content=alexvaitsekhovich/rabbitmq-delayed-messaging&utm_campaign=Badge_Grade_Dashboard)
-[![Maintainability](https://api.codeclimate.com/v1/badges/c6d5ea81364980f33357/maintainability)](https://codeclimate.com/github/alexvaitsekhovich/rabbitmq-delayed-messaging/maintainability)
+[![codecov](https://codecov.io/gh/alexvaitsekhovich/delayed-messaging-with-rabbitmq/branch/main/graph/badge.svg)](https://codecov.io/gh/alexvaitsekhovich/delayed-messaging-with-rabbitmq) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/813359310880497d8e55e58e2526b594)](https://app.codacy.com/manual/alexvaitsekhovich/delayed-messaging-with-rabbitmq?utm_source=github.com&utm_medium=referral&utm_content=alexvaitsekhovich/delayed-messaging-with-rabbitmq&utm_campaign=Badge_Grade_Dashboard)
+[![Maintainability](https://api.codeclimate.com/v1/badges/c6d5ea81364980f33357/maintainability)](https://codeclimate.com/github/alexvaitsekhovich/delayed-messaging-with-rabbitmq/maintainability)
 
 ## Concept ##
 
