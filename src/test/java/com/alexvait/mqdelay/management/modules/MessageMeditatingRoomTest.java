@@ -45,7 +45,7 @@ class MessageMeditatingRoomTest {
     @Nested
     @DisplayName("Test MessageMeditatingRoom methods")
     class MessageMeditatingRoomMethodsTest {
-        private final int maxLevel = new Random(System.currentTimeMillis()).nextInt(20);
+        private final int maxLevel = 3 + new Random(System.currentTimeMillis()).nextInt(20);
 
         @Mock
         private Channel channel;
