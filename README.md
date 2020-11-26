@@ -51,4 +51,3 @@ Now a messages with a expected delay of 27 seconds and routing key _"my-key"_ is
 * After the TTL of 2 seconds expires, the message is redirected to the _exchange_level_0001_ and consumed by the _delay_queue_0001_.
 * After the TTL of 1 second expires, the message is redirected to the _exchange_level_0000_ and consumed by the _destributing queue_.
 * The _distributing queue_ removes the topic with delay information, sets the routing key back to _"my-key"_ and publishes it to the _pick-up exchange_ from where the message can be consumed by the final receiver.
-
