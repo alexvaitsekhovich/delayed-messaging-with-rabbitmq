@@ -30,8 +30,7 @@ public class MQueueUtil {
         channel.exchangeDeclare(name, type);
     }
 
-    public void createAndBind(String queueName, String bindExchange,
-                              String deadLetterExchange, long ttl, String key) throws IOException {
+    public void createAndBind(String queueName, String bindExchange, String deadLetterExchange, long ttl, String key) throws IOException {
         Map<String, Object> args = new HashMap<>();
         args.put("x-dead-letter-exchange", deadLetterExchange);
         args.put("x-message-ttl", ttl);
@@ -42,8 +41,7 @@ public class MQueueUtil {
         createAndBind(queueName, bindExchange, key, null);
     }
 
-    protected void createAndBind(String queueName, String bindExchange,
-                              String key, Map<String, Object> args) throws IOException {
+    protected void createAndBind(String queueName, String bindExchange, String key, Map<String, Object> args) throws IOException {
         channel.queueDeclare(queueName, false, false, false, args);
         channel.queueBind(queueName, bindExchange, key);
     }

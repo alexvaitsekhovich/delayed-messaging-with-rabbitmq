@@ -6,7 +6,6 @@ import com.alexvait.mqdelay.management.modules.MessageDistributor;
 import com.alexvait.mqdelay.management.modules.MessageMeditatingRoom;
 import com.alexvait.mqdelay.management.modules.MqStructureInitializer;
 import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.ConnectionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,14 +24,14 @@ public final class MqDelayStarter {
     }
 
     public void start() throws IOException, TimeoutException {
-        ConnectionFactory factory = new ConnectionFactoryUtil().getFactory();
-        Channel channel = factory.newConnection().createChannel();
+        try (Channel channel = new ConnectionFactoryUtil().getChannel()) {
 
-        new MqStructureInitializer(new MQueueUtil(channel), levels).init();
+            new MqStructureInitializer(new MQueueUtil(channel), levels).init();
 
-        new Thread(new MessageMeditatingRoom(channel, levels)).start();
+            new Thread(new MessageMeditatingRoom(channel, levels)).start();
 
-        new Thread(new MessageDistributor(channel)).start();
+            new Thread(new MessageDistributor(channel)).start();
+        }
 
         logger.info("Delayed messaging system started");
     }

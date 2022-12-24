@@ -4,11 +4,11 @@ import com.alexvait.mqdelay.management.helpers.rabbit.RabbitConstants;
 import com.alexvait.mqdelay.management.message.DelayedMessage;
 import com.rabbitmq.client.Channel;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -16,15 +16,11 @@ import java.util.Random;
 
 import static org.mockito.Mockito.verify;
 
-@DisplayName("Test the sender of elayed messages")
+@DisplayName("Test the sender of delayed messages")
+@ExtendWith(MockitoExtension.class)
 class DelayedMessageSenderTest {
     @Mock
     private Channel channel;
-
-    @BeforeEach
-    public void setUp() {
-        MockitoAnnotations.initMocks(this);
-    }
 
     @Test
     @DisplayName("Test that the message is send correctly to the channel")

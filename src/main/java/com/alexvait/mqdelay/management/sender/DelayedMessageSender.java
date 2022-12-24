@@ -15,7 +15,7 @@ public final class DelayedMessageSender {
     }
 
     public static void send(Channel channel, long delay, String routingKey, String message) throws IOException {
-        DelayedMessage delayedMessage = new DelayedMessage(delay, routingKey, message);
+        var delayedMessage = new DelayedMessage(delay, routingKey, message);
         channel.basicPublish(RabbitConstants.CHECKIN_EXCHANGE, "", null,
                 delayedMessage.toJsonString().getBytes(StandardCharsets.UTF_8));
     }

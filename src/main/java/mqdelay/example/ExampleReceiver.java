@@ -3,7 +3,6 @@ package mqdelay.example;
 import com.alexvait.mqdelay.management.helpers.rabbit.ConnectionFactoryUtil;
 import com.alexvait.mqdelay.management.helpers.rabbit.RabbitConstants;
 import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.DeliverCallback;
 import com.rabbitmq.client.Delivery;
 import org.slf4j.Logger;
@@ -15,7 +14,7 @@ import java.nio.charset.StandardCharsets;
  * Example for receiving queue. Specify the queue name and topic in the command line.
  */
 public class ExampleReceiver {
-    private static Logger logger = LoggerFactory.getLogger(ExampleReceiver.class);
+    private static final Logger logger = LoggerFactory.getLogger(ExampleReceiver.class);
 
     public static void main(String[] argv) throws Exception {
 
@@ -24,21 +23,20 @@ public class ExampleReceiver {
             return;
         }
 
-        ConnectionFactory factory = new ConnectionFactoryUtil().getFactory();
-        Channel channel = factory.newConnection().createChannel();
-
         String receivingQueue = argv[0];
         String routingKey = argv[1];
 
-        channel.queueDeclare(receivingQueue, false, false, false, null);
-        channel.queueBind(receivingQueue, RabbitConstants.PICKUP_EXCHANGE, routingKey);
+        try (Channel channel = new ConnectionFactoryUtil().getChannel()) {
+            channel.queueDeclare(receivingQueue, false, false, false, null);
+            channel.queueBind(receivingQueue, RabbitConstants.PICKUP_EXCHANGE, routingKey);
 
-        logger.info("Receiving service is ready");
+            logger.info("Receiving service is ready");
 
-        DeliverCallback deliverCallback = ExampleReceiver::handle;
+            DeliverCallback deliverCallback = ExampleReceiver::handle;
 
-        channel.basicConsume(receivingQueue, true, deliverCallback, consumerTag -> {
-        });
+            channel.basicConsume(receivingQueue, true, deliverCallback, consumerTag -> {
+            });
+        }
     }
 
     private static void handle(String consumerTag, Delivery delivery) {

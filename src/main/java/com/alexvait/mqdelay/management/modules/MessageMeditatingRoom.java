@@ -70,7 +70,7 @@ public final class MessageMeditatingRoom implements Runnable {
     private void sendToReceivingExchange(DelayedMessage delayedMessage) throws IOException {
         long seconds = delayedMessage.getDelayTime();
 
-        NamingUtil namingUtil = new NamingUtil(maxDelay);
+        var namingUtil = new NamingUtil(maxDelay);
         String topic = namingUtil.createTopicFromTtl(seconds) + "." + delayedMessage.getRoutingKey();
 
         String receivingExchange = namingUtil.getExchangeNameForTtl(maxDelay);

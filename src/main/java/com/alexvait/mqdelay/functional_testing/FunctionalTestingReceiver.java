@@ -3,7 +3,6 @@ package com.alexvait.mqdelay.functional_testing;
 import com.alexvait.mqdelay.management.helpers.rabbit.ConnectionFactoryUtil;
 import com.alexvait.mqdelay.management.helpers.rabbit.RabbitConstants;
 import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.DeliverCallback;
 import com.rabbitmq.client.Delivery;
 import org.slf4j.Logger;
@@ -22,21 +21,20 @@ public class FunctionalTestingReceiver {
 
     public static void main(String[] argv) throws Exception {
 
-        ConnectionFactory factory = new ConnectionFactoryUtil().getFactory();
-        Channel channel = factory.newConnection().createChannel();
-
         String receivingQueue = "testing-queue";
         String routingKey = "functional-testing";
 
-        channel.queueDeclare(receivingQueue, false, false, false, null);
-        channel.queueBind(receivingQueue, RabbitConstants.PICKUP_EXCHANGE, routingKey);
+        try (Channel channel = new ConnectionFactoryUtil().getChannel()) {
+            channel.queueDeclare(receivingQueue, false, false, false, null);
+            channel.queueBind(receivingQueue, RabbitConstants.PICKUP_EXCHANGE, routingKey);
 
-        logger.info("Functional testing receiving service is ready");
+            logger.info("Functional testing receiving service is ready");
 
-        DeliverCallback deliverCallback = FunctionalTestingReceiver::handle;
+            DeliverCallback deliverCallback = FunctionalTestingReceiver::handle;
 
-        channel.basicConsume(receivingQueue, true, deliverCallback, consumerTag -> {
-        });
+            channel.basicConsume(receivingQueue, true, deliverCallback, consumerTag -> {
+            });
+        }
     }
 
     private static void handle(String consumerTag, Delivery delivery) {
