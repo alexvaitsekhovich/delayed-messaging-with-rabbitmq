@@ -4,7 +4,7 @@
 [![Build Status](https://travis-ci.org/alexvaitsekhovich/delayed-messaging-with-rabbitmq.svg?branch=main)](https://travis-ci.org/alexvaitsekhovich/delayed-messaging-with-rabbitmq) [![pipeline status](https://gitlab.com/alex.vaitsekhovich/delayed-messaging-with-rabbitmq/badges/main/pipeline.svg)](https://gitlab.com/alex.vaitsekhovich/delayed-messaging-with-rabbitmq/pipelines)
 
 [![codecov](https://codecov.io/gh/alexvaitsekhovich/delayed-messaging-with-rabbitmq/branch/main/graph/badge.svg?token=0GYptlOxgB)](https://codecov.io/gh/alexvaitsekhovich/delayed-messaging-with-rabbitmq) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/ca1d6c9dc7e44403b2c73834a0ea0d55)](https://www.codacy.com/gh/alexvaitsekhovich/delayed-messaging-with-rabbitmq/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=alexvaitsekhovich/delayed-messaging-with-rabbitmq&amp;utm_campaign=Badge_Grade)
-[![Maintainability](https://api.codeclimate.com/v1/badges/c6d5ea81364980f33357/maintainability)](https://codeclimate.com/github/alexvaitsekhovich/delayed-messaging-with-rabbitmq/maintainability)
+[![Maintainability](https://api.codeclimate.com/v1/badges/607ef6160fc07e934212/maintainability)](https://codeclimate.com/github/alexvaitsekhovich/delayed-messaging-with-rabbitmq/maintainability)
 
 ## Concept ##
 
