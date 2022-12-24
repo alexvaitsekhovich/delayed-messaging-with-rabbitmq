@@ -1,7 +1,6 @@
 package com.alexvait.mqdelay.management.helpers;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Properties;
 
 /**
@@ -39,17 +38,12 @@ public class PropertiesUtil {
         if (properties == null) {
             properties = new Properties();
 
-            try (InputStream propsIStream = PropertiesUtil.class.getResourceAsStream(APPLICATION_PROPERTIES_FILE)) {
-                properties.load(propsIStream);
-            } catch (IOException e) {
-                throw e;
-            }
-
-            properties.forEach(this::collectProperty);
+            properties.load(PropertiesUtil.class.getResourceAsStream(APPLICATION_PROPERTIES_FILE));
+            properties.keySet().forEach(this::collectProperty);
         }
     }
 
-    private void collectProperty(Object k, Object v) {
+    private void collectProperty(Object k) {
         String key = k.toString();
         if (System.getProperty(key) != null) {
             properties.put(key, System.getProperty(key));

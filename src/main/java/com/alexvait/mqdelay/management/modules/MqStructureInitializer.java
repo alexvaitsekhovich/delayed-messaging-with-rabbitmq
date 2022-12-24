@@ -3,7 +3,6 @@ package com.alexvait.mqdelay.management.modules;
 import com.alexvait.mqdelay.management.helpers.NamingUtil;
 import com.alexvait.mqdelay.management.helpers.rabbit.MQueueUtil;
 import com.alexvait.mqdelay.management.helpers.rabbit.RabbitConstants;
-import com.rabbitmq.client.BuiltinExchangeType;
 
 import java.io.IOException;
 import java.util.Objects;
